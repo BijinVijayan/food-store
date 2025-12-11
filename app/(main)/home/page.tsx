@@ -7,7 +7,7 @@ import ProductList from "@/components/home/ProductList";
 
 export default function Home() {
     return (
-        <main className="pb-24 pt-2 px-4">
+        <main className="pb-14 pt-2 px-4">
             {/* 1. Header */}
             <Header />
 
@@ -26,7 +26,7 @@ export default function Home() {
                This prevents layout shift when hydration happens.
             */}
             <Suspense fallback={
-                <div className="grid grid-cols-4 gap-2 gap-y-4 pb-2 mb-8">
+                <div className="grid grid-cols-4 gap-4 pb-2 mb-8">
                     {[...Array(4)].map((_, i) => (
                         <div key={i} className="flex flex-col items-center gap-2 animate-pulse">
                             <div className="w-16 h-16 bg-zinc-200 dark:bg-zinc-800 rounded-xl" />

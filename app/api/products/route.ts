@@ -6,9 +6,10 @@ export interface Product {
     price: number;
     rating: number;
     reviews: string;
-    image: string;
+    images: string[];
     category: string;
     isVeg: boolean;
+    description: string;
 }
 
 const data: Product[] = [
@@ -18,9 +19,14 @@ const data: Product[] = [
         price: 12.99,
         rating: 4.8,
         reviews: "2k+",
-        image: "/images/products/cheeseburger.jpg",
+        images: [
+            "/images/products/cheeseburger.jpg",
+            "/images/products/cheeseburger2.jpg",
+            "/images/products/cheeseburger3.jpg"
+        ],
         category: "burger",
-        isVeg: false
+        isVeg: false,
+        description: "A juicy, flame-grilled beef patty topped with melted cheddar cheese, fresh lettuce, tomatoes, and our secret house sauce on a toasted brioche bun."
     },
     {
         id: "2",
@@ -28,9 +34,12 @@ const data: Product[] = [
         price: 18.50,
         rating: 4.5,
         reviews: "1.5k+",
-        image: "/images/products/MargheritaPizza.webp",
+        images: [
+            "/images/products/MargheritaPizza.webp",
+        ],
         category: "pizza",
-        isVeg: true
+        isVeg: true,
+        description: "Authentic Italian classic featuring a thin, crispy crust, tangy tomato sauce, fresh mozzarella cheese, and aromatic basil leaves."
     },
     {
         id: "3",
@@ -38,9 +47,10 @@ const data: Product[] = [
         price: 8.00,
         rating: 4.9,
         reviews: "3k+",
-        image: "/images/products/Chocolate-lava-cake.jpg",
+        images: ["/images/products/Chocolate-lava-cake.jpg"],
         category: "dessert",
-        isVeg: false
+        isVeg: false,
+        description: "Decadent chocolate cake with a molten truffle center, served warm with a scoop of vanilla bean ice cream."
     },
     {
         id: "4",
@@ -48,9 +58,10 @@ const data: Product[] = [
         price: 22.00,
         rating: 4.7,
         reviews: "900+",
-        image: "/images/products/supreme pizza cake.jpg",
+        images: ["/images/products/supreme pizza cake.jpg"],
         category: "pizza",
-        isVeg: false
+        isVeg: false,
+        description: "Loaded with tender chicken chunks, bell peppers, onions, olives, and extra mozzarella for the ultimate feast."
     },
     {
         id: "5",
@@ -58,24 +69,25 @@ const data: Product[] = [
         price: 6.50,
         rating: 4.6,
         reviews: "500+",
-        image: "/images/products/masala dosa.jpg",
+        images: ["/images/products/masala dosa.jpg"],
         category: "south-indian",
-        isVeg: true
-    },
+        isVeg: true,
+        description: "Crispy fermented crepe made from rice batter and black lentils, stuffed with a lightly cooked filling of potatoes, fried onions and spices."
+    }
 ];
 
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const category = searchParams.get("category");
 
-    // Filter logic
     let filteredData = data;
+
     if (category && category !== "all") {
         filteredData = data.filter((item) => item.category === category);
     }
 
     // Simulate network delay
-    // await new Promise((resolve) => setTimeout(resolve, 1000));
+    // await new Promise((resolve) => setTimeout(resolve, 500));
 
     return NextResponse.json(filteredData);
 }

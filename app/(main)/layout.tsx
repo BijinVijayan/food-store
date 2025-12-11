@@ -1,4 +1,5 @@
 import BottomNav from "@/components/layout/BottomNav";
+import ProductModal from "@/components/ProductModal";
 
 export default function MainLayout({
                                        children,
@@ -11,6 +12,9 @@ export default function MainLayout({
                 {children}
             </main>
             <BottomNav />
+
+            {/*modal*/}
+            <ProductModal />
         </div>
     );
 }
