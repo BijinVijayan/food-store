@@ -51,7 +51,7 @@ export default function CategoryPage() {
         <div className="flex flex-col min-h-screen bg-zinc-100 dark:bg-zinc-950 pb-32">
 
             {/* 1. Header */}
-            <header className="sticky top-0 z-20 bg-zinc-50 dark:bg-zinc-950 pt-2 pb-0">
+            <header className="sticky top-0 z-20 bg-zinc-100 dark:bg-zinc-950 pt-2 pb-0">
                 <div className="flex items-center justify-between px-4 py-3">
                     <div className="flex items-center gap-4">
                         <button
@@ -61,7 +61,7 @@ export default function CategoryPage() {
                             <ArrowLeft className="w-6 h-6 text-zinc-900 dark:text-white" />
                         </button>
                         <h1 className="text-xl font-bold capitalize text-zinc-900 dark:text-white">
-                            {categorySlug}s
+                            {categorySlug}
                         </h1>
                     </div>
                     <Search className="w-6 h-6 text-zinc-900 dark:text-white" />

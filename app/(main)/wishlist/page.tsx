@@ -34,7 +34,7 @@ export default function WishlistPage() {
     return (
         <div className="flex flex-col min-h-screen bg-zinc-100 dark:bg-zinc-950 pb-10">
             {/* HEADER (Always Visible, No Loading State) */}
-            <header className="sticky top-0 z-20 bg-zinc-50 dark:bg-zinc-950 px-4 py-4 flex items-center gap-4">
+            <header className="sticky top-0 z-20 bg-zinc-100 dark:bg-zinc-950 px-4 py-4 flex items-center gap-4">
                 <button
                     onClick={() => router.back()}
                     className="p-2 -ml-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-colors"
