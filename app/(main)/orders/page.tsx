@@ -50,8 +50,7 @@ export default function OrdersPage() {
     }, []);
 
     return (
-        <div className="flex flex-col min-h-screen bg-zinc-100 dark:bg-zinc-950 pb-32">
-
+        <div className="flex flex-col min-h-screen bg-zinc-100 dark:bg-zinc-950 pb-20">
             {/* HEADER */}
             <header className="sticky top-0 z-20 bg-zinc-100 dark:bg-zinc-950 px-4 py-4 flex items-center gap-4">
                 <button
@@ -63,7 +62,7 @@ export default function OrdersPage() {
                 <h1 className="text-xl font-bold text-zinc-900 dark:text-white">Order History</h1>
             </header>
 
-            <div className="px-4 flex flex-col gap-4">
+            <div className="px-4 py-6 flex flex-col gap-4">
 
                 {isLoading ? (
                     // --- SKELETON LOADER ---
