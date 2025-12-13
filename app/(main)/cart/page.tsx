@@ -105,12 +105,12 @@ export default function CartPage() {
         return (
             <div className="flex flex-col h-screen bg-zinc-100 dark:bg-zinc-950">
                 <header className="p-4 flex items-center gap-4  dark:bg-zinc-950 z-10">
-                    <button onClick={() => router.back()} className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full">
+                    <button onClick={() => router.back()} className="p-2 -ml-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full">
                         <ChevronLeft className="w-6 h-6 text-zinc-800 dark:text-white" />
                     </button>
                     <h1 className="text-xl font-bold text-zinc-900 dark:text-white">Your Cart</h1>
                 </header>
-                <div className="flex-1 flex flex-col items-center justify-center p-8 text-center opacity-60">
+                <div className="flex-1 h-full flex flex-col items-center justify-center p-8 text-center opacity-60">
                     <div className="w-24 h-24 bg-zinc-200 dark:bg-zinc-800 rounded-full flex items-center justify-center mb-4">
                         <Trash2 className="w-10 h-10 text-zinc-400" />
                     </div>
@@ -123,7 +123,7 @@ export default function CartPage() {
 
     return (
         // pb-40 ensures the content isn't hidden behind the fixed checkout button
-        <div className="flex flex-col min-h-screen bg-zinc-50 dark:bg-zinc-950 pb-32 relative">
+        <div className="flex flex-col min-h-screen bg-zinc-100 dark:bg-zinc-950 pb-32 relative">
 
             {/* Header */}
             <header className="sticky top-0 z-20  dark:bg-zinc-950 px-4 py-4 flex items-center gap-4">
@@ -244,7 +244,7 @@ export default function CartPage() {
                 <div className="max-w-md mx-auto">
                     <button
                         onClick={() => router.push('/checkout')}
-                        className="w-full bg-primary text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/25 active:scale-95 transition-transform"
+                        className="w-full bg-primary text-white font-bold py-4 rounded-xl shadow-sm shadow-primary/25 active:scale-95 transition-transform"
                     >
                         Proceed to Checkout
                     </button>
