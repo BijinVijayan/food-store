@@ -8,7 +8,6 @@ import {
     Edit2,
     Trash2,
     Filter,
-    MoreHorizontal
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -65,8 +64,7 @@ export default function MenuPage() {
     const [searchTerm, setSearchTerm] = useState("");
 
     return (
-        // Added max-w-full and overflow-x-hidden to prevent page blowout
-        <div className="w-full md:max-w-7xl mx-auto space-y-6 overflow-auto">
+        <div className="w-full max-w-7xl mx-auto space-y-6 pb-20 md:pb-0">
 
             {/* 1. Page Header */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -75,14 +73,14 @@ export default function MenuPage() {
                     <p className="text-zinc-500 text-sm">Manage your food inventory and prices</p>
                 </div>
 
-                <button className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2.5 rounded-xl font-bold shadow-lg shadow-orange-500/20 flex items-center justify-center gap-2 active:scale-95 transition-all w-full md:w-auto">
+                <button className="bg-primary hover:bg-orange-600 text-white px-5 py-2.5 rounded-xl font-semibold shadow-sm shadow-orange-500/20 flex items-center justify-center gap-2 active:scale-95 transition-all w-full md:w-auto">
                     <Plus className="w-5 h-5" />
                     <span>Add New Product</span>
                 </button>
             </div>
 
             {/* 2. Filters & Search Bar */}
-            <div className="bg-white p-4 rounded-2xl border border-zinc-100 shadow-sm flex flex-col lg:flex-row gap-4">
+            <div className="bg-white p-3 rounded-2xl border border-zinc-100 flex flex-col lg:flex-row gap-4">
                 {/* Search */}
                 <div className="flex-1 relative w-full">
                     <Search className="absolute left-4 top-3.5 w-5 h-5 text-zinc-400" />
@@ -91,11 +89,11 @@ export default function MenuPage() {
                         placeholder="Search products..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full pl-12 pr-4 py-3 bg-zinc-50 rounded-xl outline-none text-sm focus:ring-2 focus:ring-orange-100 border border-transparent focus:border-orange-200 transition-all"
+                        className="w-full pl-12 pr-4 py-3 bg-zinc-50 rounded-xl outline-none text-sm focus:ring-2 focus:ring-neutral-50 border border-transparent focus:border-transparent transition-all"
                     />
                 </div>
 
-                {/* Filters - Scrollable Row on Mobile */}
+                {/* Filters */}
                 <div className="flex gap-3 overflow-x-auto pb-2 lg:pb-0 w-full lg:w-auto no-scrollbar">
                     <select className="bg-zinc-50 px-4 py-3 rounded-xl outline-none text-sm text-zinc-600 font-medium border border-zinc-100 focus:border-orange-200 min-w-[140px] cursor-pointer flex-shrink-0">
                         <option>All Categories</option>
@@ -111,107 +109,143 @@ export default function MenuPage() {
                 </div>
             </div>
 
-            {/* 3. Product Table */}
-            <div className="bg-white rounded-2xl border border-zinc-100 shadow-sm overflow-hidden">
-                {/* Scroll Wrapper: w-full ensures it doesn't expand parent, overflow-x-auto enables scroll */}
-                <div className="w-full overflow-x-auto">
-                    <table className="w-full text-left border-collapse min-w-[800px]">
-                        {/* Table Head */}
-                        <thead className="bg-zinc-50 border-b border-zinc-100 text-xs uppercase text-zinc-500 font-semibold tracking-wider">
-                        <tr>
-                            {/* Sticky Column for Mobile context */}
-                            <th className="p-5 min-w-[250px] sticky left-0 bg-zinc-50 z-10 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)] md:shadow-none md:static">Product Name</th>
-                            <th className="p-5 min-w-[120px]">Category</th>
-                            <th className="p-5 min-w-[100px]">Price</th>
-                            <th className="p-5 min-w-[140px]">Status</th>
-                            <th className="p-5 text-right min-w-[100px]">Actions</th>
-                        </tr>
-                        </thead>
+            {/* --- VIEW 1: MOBILE CARDS (Visible on Mobile, Hidden on Desktop) --- */}
+            <div className="grid grid-cols-1 gap-4 md:hidden">
+                {PRODUCTS.map((item) => (
+                    <div key={item.id} className="bg-white p-4 rounded-2xl border border-zinc-100 flex flex-col gap-4">
+                        {/* Card Top: Image & Details */}
+                        <div className="flex items-start gap-4">
+                            <div className="w-20 h-20 bg-zinc-100 rounded-xl relative overflow-hidden shrink-0 border border-zinc-100">
+                                <Image
+                                    src={item.image}
+                                    alt={item.name}
+                                    fill
+                                    className="object-cover"
+                                />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                                <div className="flex justify-between items-start">
+                                    <h3 className="font-bold text-zinc-900 text-base line-clamp-1">{item.name}</h3>
+                                </div>
+                                <span className="font-bold text-zinc-500 text-nowrap">{item.price}</span>
+                                {/*<p className="text-xs text-zinc-500 mt-1 mb-2">{item.subCategory}</p>*/}
+                                <div>
+                                    <span className="mt-1 inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold bg-orange-50 text-primary border border-orange-100 uppercase tracking-wide">
+                                    {item.category}
+                                </span>
+                                </div>
 
-                        {/* Table Body */}
-                        <tbody className="divide-y divide-zinc-50">
-                        {PRODUCTS.map((item) => (
-                            <tr
-                                key={item.id}
-                                className="group hover:bg-zinc-50/50 transition-colors"
-                            >
-                                {/* Product Info - Sticky */}
-                                <td className="p-5 sticky left-0 bg-white group-hover:bg-zinc-50/50 z-10 shadow-[2px_0_5px_-2px_rgba(0,0,0,0.1)] md:shadow-none md:static">
-                                    <div className="flex items-center gap-4">
-                                        <div className="w-12 h-12 bg-zinc-100 rounded-lg relative overflow-hidden border border-zinc-100 shrink-0">
-                                            <Image
-                                                src={item.image}
-                                                alt={item.name}
-                                                fill
-                                                className="object-cover"
-                                            />
-                                        </div>
-                                        <div>
-                                            <p className="font-bold text-zinc-900 text-sm truncate max-w-[150px]">{item.name}</p>
-                                            <p className="text-xs text-zinc-500 mt-0.5">{item.subCategory}</p>
-                                        </div>
-                                    </div>
-                                </td>
+                            </div>
+                        </div>
 
-                                {/* Category */}
-                                <td className="p-5">
-                                   <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-orange-50 text-orange-600 border border-orange-100">
-                                      {item.category}
-                                   </span>
-                                </td>
+                        {/* Divider */}
+                        <div className="border-t border-zinc-50" />
 
-                                {/* Price */}
-                                <td className="p-5">
-                                    <span className="font-medium text-zinc-700 text-sm">{item.price}</span>
-                                </td>
+                        {/* Card Bottom: Status & Actions */}
+                        <div className="flex items-center justify-between">
+                            {/* Status Toggle */}
+                            <button className={cn(
+                                "flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold transition-all border",
+                                item.status === 'In Stock'
+                                    ? "bg-green-50 text-green-700 border-green-100"
+                                    : "bg-zinc-100 text-zinc-500 border-zinc-200"
+                            )}>
+                                <div className={cn(
+                                    "w-2 h-2 rounded-full",
+                                    item.status === 'In Stock' ? "bg-green-600" : "bg-zinc-400"
+                                )} />
+                                {item.status}
+                            </button>
 
-                                {/* Status Toggle */}
-                                <td className="p-5">
-                                    <button className={cn(
-                                        "flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold transition-all border whitespace-nowrap",
-                                        item.status === 'In Stock'
-                                            ? "bg-green-50 text-green-700 border-green-100 hover:bg-green-100"
-                                            : "bg-zinc-100 text-zinc-500 border-zinc-200 hover:bg-zinc-200"
-                                    )}>
-                                        <div className={cn(
-                                            "w-2 h-2 rounded-full",
-                                            item.status === 'In Stock' ? "bg-green-600" : "bg-zinc-400"
-                                        )} />
-                                        {item.status}
-                                    </button>
-                                </td>
-
-                                {/* Actions */}
-                                <td className="p-5 text-right">
-                                    {/* Desktop Actions */}
-                                    <div className="hidden md:flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <button className="p-2 bg-white border border-zinc-200 rounded-lg text-zinc-500 hover:text-orange-500 hover:border-orange-200 shadow-sm transition-all">
-                                            <Edit2 className="w-4 h-4" />
-                                        </button>
-                                        <button className="p-2 bg-white border border-zinc-200 rounded-lg text-zinc-500 hover:text-red-500 hover:border-red-200 shadow-sm transition-all">
-                                            <Trash2 className="w-4 h-4" />
-                                        </button>
-                                    </div>
-                                    {/* Mobile Actions Fallback */}
-                                    <div className="md:hidden flex justify-end">
-                                        <button className="p-2 text-zinc-400">
-                                            <MoreHorizontal className="w-5 h-5" />
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
-                </div>
-
-                {/* Pagination */}
-                <div className="p-4 border-t border-zinc-100 flex flex-col md:flex-row gap-4 items-center justify-between text-sm text-zinc-500">
-                    <span>Showing 1-5 of 24 items</span>
-                    <div className="flex gap-2 w-full md:w-auto">
-                        <button className="flex-1 md:flex-none px-4 py-2 border border-zinc-200 rounded-lg hover:bg-zinc-50 disabled:opacity-50">Prev</button>
-                        <button className="flex-1 md:flex-none px-4 py-2 border border-zinc-200 rounded-lg hover:bg-zinc-50">Next</button>
+                            {/* Actions */}
+                            <div className="flex gap-2">
+                                <button className="p-2 bg-zinc-50 border border-zinc-200 rounded-lg text-zinc-500 hover:text-orange-500 hover:border-orange-200 active:scale-95 transition-all">
+                                    <Edit2 className="w-4 h-4" />
+                                </button>
+                                <button className="p-2 bg-zinc-50 border border-zinc-200 rounded-lg text-zinc-500 hover:text-red-500 hover:border-red-200 active:scale-95 transition-all">
+                                    <Trash2 className="w-4 h-4" />
+                                </button>
+                            </div>
+                        </div>
                     </div>
+                ))}
+            </div>
+
+            {/* --- VIEW 2: DESKTOP TABLE (Hidden on Mobile, Visible on Desktop) --- */}
+            <div className="hidden md:block bg-white rounded-2xl border border-zinc-100 overflow-hidden">
+                <table className="w-full text-left border-collapse">
+                    <thead className="bg-neutral-100 border-b border-zinc-100 text-xs uppercase text-zinc-500 font-semibold tracking-wider">
+                    <tr>
+                        <th className="p-5">Product Name</th>
+                        <th className="p-5">Category</th>
+                        <th className="p-5">Price</th>
+                        <th className="p-5">Status</th>
+                        <th className="p-5 text-right">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody className="divide-y divide-zinc-100">
+                    {PRODUCTS.map((item) => (
+                        <tr key={item.id} className="group hover:bg-zinc-50/50 transition-colors">
+                            <td className="p-5">
+                                <div className="flex items-center gap-4">
+                                    <div className="w-14 h-14 bg-zinc-100 rounded-lg relative overflow-hidden border border-zinc-100 shrink-0">
+                                        <Image
+                                            src={item.image}
+                                            alt={item.name}
+                                            fill
+                                            className="object-cover"
+                                        />
+                                    </div>
+                                    <div>
+                                        <p className="font-bold text-zinc-900 text-sm">{item.name}</p>
+                                        <p className="text-xs text-zinc-500 mt-0.5">{item.subCategory}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td className="p-5">
+                                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-orange-50 text-orange-600 border border-orange-100">
+                                        {item.category}
+                                    </span>
+                            </td>
+                            <td className="p-5">
+                                <span className="font-medium text-zinc-600 text-sm">{item.price}</span>
+                            </td>
+                            <td className="p-5">
+                                <button className={cn(
+                                    "flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold transition-all border",
+                                    item.status === 'In Stock'
+                                        ? "bg-green-50 text-green-700 border-green-100 hover:bg-green-100"
+                                        : "bg-zinc-50 text-zinc-500 border-zinc-200 hover:bg-zinc-100"
+                                )}>
+                                    <div className={cn(
+                                        "w-2 h-2 rounded-full",
+                                        item.status === 'In Stock' ? "bg-green-600" : "bg-zinc-400"
+                                    )} />
+                                    {item.status}
+                                </button>
+                            </td>
+                            <td className="p-5 text-right">
+                                <div className="flex justify-end gap-2 opacity-100 transition-opacity">
+                                    <button className="p-2 bg-white border border-zinc-200 rounded-lg text-zinc-600 hover:border-orange-200 hover:text-orange-400 transition-all">
+                                        <Edit2 className="w-4 h-4" />
+                                    </button>
+                                    <button className="p-2 bg-white border border-zinc-200 rounded-lg text-red-500 hover:border-red-200 transition-all">
+                                        <Trash2 className="w-4 h-4" />
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+            </div>
+
+            {/* Pagination */}
+            <div className="flex p-4 border-t items-center justify-between text-sm text-zinc-500 bg-white rounded-2xl border-x border-b border-zinc-100">
+                <span>Showing 1-5 of 24 items</span>
+                <div className="flex gap-2">
+                    <button className="px-3 py-1 border border-zinc-200 rounded-lg hover:bg-zinc-50 disabled:opacity-50">Prev</button>
+                    <button className="px-3 py-1 border border-zinc-200 rounded-lg hover:bg-zinc-50">Next</button>
                 </div>
             </div>
         </div>
