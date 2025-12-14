@@ -7,9 +7,10 @@ import {
     Search,
     Edit2,
     Trash2,
-    Filter,
+    Filter, ChevronDown,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 // Static Data
 const PRODUCTS = [
@@ -73,10 +74,10 @@ export default function MenuPage() {
                     <p className="text-zinc-500 text-sm">Manage your food inventory and prices</p>
                 </div>
 
-                <button className="bg-primary hover:bg-orange-600 text-white px-5 py-2.5 rounded-xl font-semibold shadow-sm shadow-orange-500/20 flex items-center justify-center gap-2 active:scale-95 transition-all w-full md:w-auto">
+                <Link href={"/admin/menu/add"} className="bg-primary hover:bg-orange-600 text-white text-sm px-5 py-2.5 rounded-xl font-semibold shadow-sm shadow-orange-500/20 flex items-center justify-center gap-2 active:scale-95 transition-all w-full md:w-auto">
                     <Plus className="w-5 h-5" />
                     <span>Add New Product</span>
-                </button>
+                </Link>
             </div>
 
             {/* 2. Filters & Search Bar */}
@@ -95,17 +96,34 @@ export default function MenuPage() {
 
                 {/* Filters */}
                 <div className="flex gap-3 overflow-x-auto pb-2 lg:pb-0 w-full lg:w-auto no-scrollbar">
-                    <select className="bg-zinc-50 px-4 py-3 rounded-xl outline-none text-sm text-zinc-600 font-medium border border-zinc-100 focus:border-orange-200 min-w-[140px] cursor-pointer flex-shrink-0">
-                        <option>All Categories</option>
-                        <option>Pizza</option>
-                        <option>Burgers</option>
-                        <option>Drinks</option>
-                    </select>
+                    {/* SELECT WRAPPER */}
+                    <div className="relative flex-shrink-0">
+                        <select
+                            className="bg-zinc-50 px-4 appearance-none pr-8 py-3 rounded-xl
+                             outline-none text-sm text-zinc-600 font-medium
+                             border border-zinc-100 focus:border-orange-200
+                             min-w-[140px] cursor-pointer"
+                                    >
+                            <option>All Categories</option>
+                            <option>Pizza</option>
+                            <option>Burgers</option>
+                            <option>Drinks</option>
+                        </select>
 
-                    <button className="bg-zinc-50 px-4 py-3 rounded-xl border border-zinc-100 text-zinc-600 hover:bg-zinc-100 transition-colors flex items-center gap-2 flex-shrink-0 whitespace-nowrap">
+                        {/* ARROW ICON */}
+                        <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500">
+                          <ChevronDown className="w-4 h-4" />
+                        </span>
+                    </div>
+
+                    {/* FILTER BUTTON */}
+                    <button className="bg-zinc-50 px-4 py-3 rounded-xl border border-zinc-100
+                     text-zinc-600 hover:bg-zinc-100 transition-colors
+                     flex items-center gap-2 flex-shrink-0 whitespace-nowrap">
                         <Filter className="w-4 h-4" />
                         <span className="text-sm font-medium">Filter</span>
                     </button>
+
                 </div>
             </div>
 

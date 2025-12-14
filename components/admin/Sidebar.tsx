@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
     LayoutDashboard, ShoppingBag, UtensilsCrossed, Users,
-    BarChart2, Settings, HelpCircle, ChefHat, X
+    BarChart2, Settings, HelpCircle, ChefHat, X, Boxes
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -12,7 +12,7 @@ const MENU_ITEMS = [
     { label: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
     { label: "Orders", href: "/admin/orders", icon: ShoppingBag, badge: 3 },
     { label: "Menu", href: "/admin/menu", icon: UtensilsCrossed },
-    { label: "Customers", href: "/admin/customers", icon: Users },
+    { label: "Categories", href: "/admin/categories", icon: Boxes },
     { label: "Analytics", href: "/admin/analytics", icon: BarChart2 },
 ];
 

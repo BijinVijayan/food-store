@@ -90,7 +90,7 @@ export default function VerifyOtpPage() {
 
                 {/* Resend Links */}
                 <div className="flex flex-col gap-4">
-                    <button className="flex items-center justify-center gap-2 text-sm font-semibold text-zinc-600 hover:text-zinc-900 transition-colors">
+                    <button className="flex cursor-pointer items-center justify-center gap-2 text-sm font-semibold text-zinc-600 hover:text-zinc-900 transition-colors">
                         <RotateCw className="w-4 h-4 text-primary" /> Resend Code
                     </button>
 
