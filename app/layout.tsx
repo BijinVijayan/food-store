@@ -1,22 +1,29 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
-import {Montserrat} from "next/font/google";
-import ThemeDebug from "@/components/ThemeDebug";
+import { Montserrat } from "next/font/google";
 
 const montserrat = Montserrat({
     subsets: ["latin"],
-    weight: ["400", "500", "600", "700"],
-    variable: "--font-montsans",
+    weight: ["400", "500", "600", "700", "800"],
+    variable: "--font-montserrat",
+    display: "swap",
 });
 
 export const metadata: Metadata = {
-    title: "Pizza Palace",
-    description: "The best food delivered to you.",
+    title: {
+        template: "%s | RestoAdmin",
+        default: "RestoAdmin - Restaurant Management System",
+    },
+    description: "All-in-one dashboard to manage orders, kitchen workflows, and inventory.",
+    applicationName: "RestoAdmin",
     appleWebApp: {
         capable: true,
         statusBarStyle: "default",
-        title: "Pizza Palace",
+        title: "RestoAdmin",
+    },
+    formatDetection: {
+        telephone: false,
     },
 };
 
@@ -25,7 +32,9 @@ export const viewport: Viewport = {
     initialScale: 1,
     maximumScale: 1,
     userScalable: false,
+    themeColor: "#ffffff",
 };
+
 
 export default function RootLayout({
                                        children,
@@ -35,18 +44,9 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
         <body
-            className={
-                `${montserrat.variable} antialiased `
-            }
+            className={`${montserrat.variable} font-montserrat antialiased bg-zinc-50 text-zinc-900 min-h-screen flex flex-col`}
         >
-        <Providers>
-            {/*<ThemeDebug />*/}
-            <div className="flex justify-center min-h-screen w-full bg-zinc-100 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100">
-                <div className="w-full font-montsans  min-h-screen relative overflow-x-hidden">
-                    {children}
-                </div>
-            </div>
-        </Providers>
+        <Providers>{children}</Providers>
         </body>
         </html>
     );

@@ -1,10 +1,13 @@
 @import "tailwindcss";
 
-/* 👇 THIS LINE FIXES THE ISSUE: Forces class-based dark mode */
+/* 1. Force class-based dark mode */
 @variant dark (&:where(.dark, .dark *));
 
+/* 2. Configure Tailwind (Map tokens to variables) */
 @theme {
-    /* 1. Map CSS Variables to Tailwind Colors */
+    /* Override the default font-sans to use your Next.js variable */
+    --font-montserrat: "Montserrat", var(--font-montserrat), ui-sans-serif;
+    /* Map Colors */
     --color-background: var(--background);
     --color-foreground: var(--foreground);
 
@@ -33,20 +36,17 @@
     --color-input: var(--input);
     --color-ring: var(--ring);
 
-    /* 2. Map Border Radius */
+    /* Map Radius */
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
     --radius-sm: calc(var(--radius) - 4px);
-
-    /* 3. Fonts */
-    --font-montsans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-/* 4. Define the Actual Values (Light/Dark Mode) */
+/* 3. Define CSS Variables (MUST be OUTSIDE the @theme block) */
 :root {
-    /* Light Mode */
+    /* Light Mode Values */
     --background: #ffffff;
-    --foreground: #09090b; /* zinc-950 */
+    --foreground: #09090b;
 
     --card: #ffffff;
     --card-foreground: #09090b;
@@ -54,10 +54,10 @@
     --popover: #ffffff;
     --popover-foreground: #09090b;
 
-    --primary: #F54900;    /* Orange-500 */
+    --primary: #F54900;
     --primary-foreground: #fafafa;
 
-    --secondary: #f4f4f5;  /* zinc-100 */
+    --secondary: #f4f4f5;
     --secondary-foreground: #18181b;
 
     --muted: #f4f4f5;
@@ -73,13 +73,13 @@
     --input: #e4e4e7;
     --ring: #f97316;
 
-    --radius: 0.75rem; /* rounded-xl */
+    --radius: 0.75rem;
 }
 
 .dark {
-    /* Dark Mode */
-    --background: #09090b; /* zinc-950 */
-    --foreground: #fafafa; /* zinc-50 */
+    /* Dark Mode Values */
+    --background: #09090b;
+    --foreground: #fafafa;
 
     --card: #09090b;
     --card-foreground: #fafafa;
@@ -87,10 +87,10 @@
     --popover: #09090b;
     --popover-foreground: #fafafa;
 
-    --primary: #f97316;    /* Orange-500 */
+    --primary: #f97316;
     --primary-foreground: #fafafa;
 
-    --secondary: #27272a;  /* zinc-800 */
+    --secondary: #27272a;
     --secondary-foreground: #fafafa;
 
     --muted: #27272a;
@@ -107,7 +107,7 @@
     --ring: #f97316;
 }
 
-/* Utilities */
+/* 4. Define Utilities (MUST be OUTSIDE the @theme block) */
 @utility pb-safe {
     padding-bottom: env(safe-area-inset-bottom);
 }
