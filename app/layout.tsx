@@ -42,7 +42,7 @@ export default function RootLayout({
         <Providers>
             {/*<ThemeDebug />*/}
             <div className="flex justify-center min-h-screen w-full bg-zinc-100 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100">
-                <div className="w-full font-montsans  min-h-screen shadow-2xl relative overflow-x-hidden">
+                <div className="w-full font-montsans  min-h-screen relative overflow-x-hidden">
                     {children}
                 </div>
             </div>
