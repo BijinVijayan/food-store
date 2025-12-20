@@ -41,8 +41,8 @@ export default function LandingPage() {
                     </div>
 
                     <div className="hidden md:flex items-center gap-5">
-                        <Link href="/admin/login" className="text-sm font-bold text-zinc-600 hover:text-zinc-900">Log in</Link>
-                        <Link href="/admin/login" className="bg-zinc-900 hover:bg-zinc-800 text-white px-5 py-2.5 rounded-full text-sm font-bold transition-all">
+                        <Link href="/login" className="text-sm font-bold text-zinc-600 hover:text-zinc-900">Log in</Link>
+                        <Link href="/login" className="bg-zinc-900 hover:bg-zinc-800 text-white px-5 py-2.5 rounded-full text-sm font-bold transition-all">
                             Get Started
                         </Link>
                     </div>
@@ -77,7 +77,7 @@ export default function LandingPage() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-                        <Link href="/admin/login" className="w-full sm:w-auto px-8 py-4 bg-primary hover:bg-orange-600 text-white rounded-xl font-bold text-lg shadow-sm shadow-primary/20 transition-all active:scale-95">
+                        <Link href="/login" className="w-full sm:w-auto px-8 py-4 bg-primary hover:bg-orange-600 text-white rounded-xl font-bold text-lg shadow-sm shadow-primary/20 transition-all active:scale-95">
                             Start Free Trial
                         </Link>
                         <button className="w-full sm:w-auto px-8 py-4 bg-white border border-zinc-200 hover:bg-zinc-50 text-zinc-700 rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-all">

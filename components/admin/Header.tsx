@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, Bell, Mail, Menu } from "lucide-react";
+import {Search, Bell, Mail, Menu} from "lucide-react";
 
 export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
     return (
@@ -28,11 +28,11 @@ export default function Header({ onMenuClick }: { onMenuClick: () => void }) {
 
             {/* Actions */}
             <div className="flex items-center gap-2 md:gap-4 shrink-0">
-                <button className="p-2 md:p-3 rounded-xl hover:bg-zinc-50 border border-zinc-100 text-zinc-500 transition-colors relative">
+                <button className="p-2 cursor-pointer md:p-3 rounded-xl hover:bg-zinc-50 border border-zinc-100 text-zinc-500 transition-colors relative">
                     <Bell className="w-5 h-5" />
                     <span className="absolute top-2.5 right-3 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
                 </button>
-                <button className="p-2 md:p-3 rounded-xl hover:bg-zinc-50 border border-zinc-100 text-zinc-500 transition-colors">
+                <button className="p-2 cursor-pointer md:p-3 rounded-xl hover:bg-zinc-50 border border-zinc-100 text-zinc-500 transition-colors">
                     <Mail className="w-5 h-5" />
                 </button>
             </div>

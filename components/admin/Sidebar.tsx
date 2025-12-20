@@ -3,17 +3,18 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-    LayoutDashboard, ShoppingBag, UtensilsCrossed, Users,
-    BarChart2, Settings, HelpCircle, ChefHat, X, Boxes
+    LayoutDashboard, ShoppingBag, UtensilsCrossed, Settings, HelpCircle, ChefHat, X, Boxes, Landmark
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+import {IUser} from "@/models/User";
 
 const MENU_ITEMS = [
     { label: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
     { label: "Orders", href: "/admin/orders", icon: ShoppingBag, badge: 3 },
     { label: "Menu", href: "/admin/menu", icon: UtensilsCrossed },
     { label: "Categories", href: "/admin/categories", icon: Boxes },
-    { label: "Analytics", href: "/admin/analytics", icon: BarChart2 },
+    { label: "Halls & Tables", href: "/admin/halls", icon: Landmark },
 ];
 
 const SYSTEM_ITEMS = [
@@ -24,9 +25,11 @@ const SYSTEM_ITEMS = [
 interface SidebarProps {
     isOpen: boolean;
     onClose: () => void;
+    storeLogo: string;
+    user: IUser | null;
 }
 
-export default function Sidebar({ isOpen, onClose }: SidebarProps) {
+export default function Sidebar({ isOpen, onClose, storeLogo, user }: SidebarProps) {
     const pathname = usePathname();
 
     return (
@@ -79,16 +82,17 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 </div>
 
                 {/* User Profile Footer */}
-                <div className="p-4 border-t border-zinc-50">
+                <div className="p-4 border-t border-zinc-50 relative">
                     <div className="flex items-center gap-3 p-3 rounded-xl bg-zinc-50 border border-zinc-100">
-                        <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center shrink-0">
-                            <span className="font-bold text-orange-600">AU</span>
+                        <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center shrink-0 overflow-hidden">
+                            <Image src={storeLogo} alt={storeLogo} height={500} width={500} className={"w-full h-full object-cover"} />
                         </div>
                         <div className="overflow-hidden">
-                            <p className="text-sm font-bold text-zinc-900 truncate">Admin User</p>
-                            <p className="text-xs text-zinc-500 truncate">Manager</p>
+                            <p className="text-sm font-bold text-zinc-900 truncate">{user?.name}</p>
+                            <p className="text-xs text-zinc-500 truncate capitalize">{user?.role}</p>
                         </div>
                     </div>
+
                 </div>
             </aside>
         </>
